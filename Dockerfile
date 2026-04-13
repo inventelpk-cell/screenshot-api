@@ -27,11 +27,11 @@ RUN groupadd -r appuser && useradd -r -g appuser -d /app appuser
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-RUN npm ci --omit=dev && npm cache clean --force
+RUN npm ci && npm cache clean --force
 
 COPY tsconfig.json ./
 COPY src/ ./src/
-RUN npx tsc && rm -rf src tsconfig.json
+RUN npx tsc && rm -rf src tsconfig.json node_modules && npm ci --omit=dev && npm cache clean --force
 
 RUN chown -R appuser:appuser /app
 USER appuser
