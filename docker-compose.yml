@@ -4,7 +4,7 @@ services:
     container_name: screenshot-api
     restart: unless-stopped
     ports:
-      - "${PORT:-3000}:3000"
+      - "3001:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
